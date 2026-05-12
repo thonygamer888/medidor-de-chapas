@@ -1,0 +1,88 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f8ff;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container {
+    background-color: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 650px;
+}
+
+h2 { 
+    color: #4a90e2; 
+    text-align: center; 
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #b0d4ff;
+    border-radius: 5px;
+    outline: none;
+}
+
+input:focus {
+    border-color: #4a90e2;
+}
+
+.btn-add {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-pdf {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background-color: #e6f2ff;
+    color: #4a90e2;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #b0d4ff;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-delete {
+    background: #ff6b6b; 
+    color: white; 
+    border: none; 
+    padding: 5px 10px;
+    border-radius: 3px; 
+    cursor: pointer;
+}

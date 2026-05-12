@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotações de Chapas</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container" id="conteudo-pdf">
+    <h2>Medidas para Corte</h2>
+    
+    <div class="input-group no-export">
+        <input type="text" id="chapa" placeholder="Chapa">
+        <input type="text" id="medida" placeholder="Medida">
+        <input type="text" id="quantidade" placeholder="Qtd">
+        <button class="btn-add" onclick="adicionarLinha()">Adicionar</button>
+    </div>
+
+    <table id="tabelaMedidas">
+        <thead>
+            <tr>
+                <th>Chapa</th>
+                <th>Medida</th>
+                <th>Qtd</th>
+                <th class="no-export">Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+
+    <button class="btn-pdf no-export" onclick="gerarPDF()">Baixar Lista em PDF</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
