@@ -68,27 +68,29 @@ function gerarPDF() {
         return;
     }
 
-    // AJUSTE PARA NÃO CORTAR: Removemos o padding gigante temporariamente
-    const originalPadding = elemento.style.padding;
-    elemento.style.padding = "20px"; 
-    elemento.style.width = "auto";
+    // Forçamos o elemento a se preparar para a captura
+    // Isso remove qualquer trava de altura que o CSS possa estar impondo
+    elemento.style.height = 'auto';
+    elemento.style.overflow = 'visible';
 
     const options = {
-        margin:       10,
-        filename:     'lista_de_peças.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { 
+        margin: [10, 10, 10, 10],
+        filename: 'lista_de_peças.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
             scale: 2, 
-            logging: true, 
-            letterRendering: true,
             useCORS: true,
-            ignoreElements: (el) => el.classList.contains('no-export') 
+            letterRendering: true,
+            // IMPORTANTE: scrollY: 0 evita a página 1 em branco
+            scrollY: 0, 
+            // windowHeight garante que ele "enxergue" todos os 32 itens
+            windowHeight: elemento.scrollHeight 
         },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        // Evita que as linhas da tabela sejam cortadas ao meio entre páginas
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
-    // Executa e depois volta o estilo original da tela
-    html2pdf().set(options).from(elemento).save().then(() => {
-        elemento.style.padding = originalPadding;
-    });
+    // Gera o PDF
+    html2pdf().set(options).from(elemento).save();
 }

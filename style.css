@@ -1,3 +1,4 @@
+/* --- CONFIGURAÇÃO GERAL --- */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f8ff; /* Azul clarinho */
@@ -24,6 +25,7 @@ h2 {
     padding: 10px;
 }
 
+/* --- GRUPO DE INPUTS --- */
 .input-group {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr auto;
@@ -39,9 +41,10 @@ input {
 }
 
 input:focus {
-    border-color: #4a90e2; /* Destaque em azul */
+    border-color: #4a90e2; /* Destaque em azul ao clicar */
 }
 
+/* --- BOTÕES PRINCIPAIS --- */
 .btn-add {
     background-color: #4a90e2;
     color: white;
@@ -57,7 +60,7 @@ input:focus {
 }
 
 .btn-pdf {
-    background-color: #27ae60; /* Verde para o PDF (combina bem com azul) */
+    background-color: #27ae60; /* Verde para o PDF */
     color: white;
     border: none;
     padding: 12px;
@@ -72,6 +75,7 @@ input:focus {
     background-color: #219150;
 }
 
+/* --- TABELA --- */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -91,10 +95,9 @@ td {
     border-bottom: 1px solid #eee;
 }
 
-/* --- BOTÕES DA TABELA --- */
-
+/* --- BOTÕES DE AÇÃO NA TABELA --- */
 .btn-edit {
-    background-color: #f39c12; /* Laranja para destacar do azul */
+    background-color: #0d96da; /* Laranja para Editar */
     color: white;
     border: none;
     padding: 5px 10px;
@@ -104,11 +107,11 @@ td {
 }
 
 .btn-edit:hover {
-    background-color: #d68910;
+    background-color: #1a7ed5;
 }
 
 .btn-delete {
-    background: #ff6b6b; /* Vermelho suave para excluir */
+    background: #ff6b6b; /* Vermelho para Excluir */
     color: white; 
     border: none; 
     padding: 5px 10px;
@@ -120,16 +123,44 @@ td {
     background-color: #e74c3c;
 }
 
-/* --- PDF --- */
+/* --- REGRAS PARA O PDF (HTML2PDF) --- */
+#conteudo-pdf {
+    overflow: visible !important;
+    height: auto !important;
+}
 
 .pdf-layout {
     width: 100% !important;
     max-width: none !important;
-    padding: 10px !important;
+    padding: 20px !important;
     margin: 0 !important;
     box-shadow: none !important;
 }
 
 .pdf-layout table {
     width: 100% !important;
+}
+
+/* Impede que o PDF corte uma linha da tabela ao meio entre páginas */
+tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+}
+
+thead {
+    display: table-header-group; /* Repete o cabeçalho se houver mais de uma página */
+}
+
+/* Configurações específicas de impressão */
+@media print {
+    body {
+        background: none;
+    }
+    .container {
+        padding: 10px !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        box-shadow: none !important;
+    }
 }
