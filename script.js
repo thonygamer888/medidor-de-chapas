@@ -14,7 +14,7 @@ function adicionarLinha() {
     // 3. Cria a nova linha na tabela
     const novaLinha = tabela.insertRow();
     
-    // Adicionei o botão de Editar aqui dentro:
+    // O <td> de ações já possui a classe "no-export" para ser ignorado no PDF
     novaLinha.innerHTML = `
         <td>${campoPeca.value}</td>
         <td>${campoCorte.value}</td>
@@ -34,21 +34,17 @@ function adicionarLinha() {
     campoPeca.focus();
 }
 
-// NOVA FUNÇÃO: Editar
+// Função para Editar
 function editar(btn) {
     const linha = btn.closest('tr');
-    
-    // Pega os valores atuais das células
     const pecaAtual = linha.cells[0].innerText;
     const corteAtual = linha.cells[1].innerText;
     const qtdAtual = linha.cells[2].innerText;
 
-    // Abre caixas de pergunta para o novo valor
     const novaPeca = prompt("Editar Peça:", pecaAtual);
     const novoCorte = prompt("Editar Corte:", corteAtual);
     const novaQtd = prompt("Editar Quantidade:", qtdAtual);
 
-    // Se o usuário não cancelar (null) e preencher, ele atualiza
     if (novaPeca !== null && novoCorte !== null && novaQtd !== null) {
         linha.cells[0].innerText = novaPeca;
         linha.cells[1].innerText = novoCorte;
@@ -56,10 +52,12 @@ function editar(btn) {
     }
 }
 
+// Função para Remover
 function remover(btn) {
     btn.closest('tr').remove();
 }
 
+// Função para Gerar PDF (Limpando o layout)
 function gerarPDF() {
     const elemento = document.getElementById('conteudo-pdf');
     
@@ -68,8 +66,7 @@ function gerarPDF() {
         return;
     }
 
-    // Forçamos o elemento a se preparar para a captura
-    // Isso remove qualquer trava de altura que o CSS possa estar impondo
+    // Ajustes temporários para garantir captura total
     elemento.style.height = 'auto';
     elemento.style.overflow = 'visible';
 
@@ -81,13 +78,12 @@ function gerarPDF() {
             scale: 2, 
             useCORS: true,
             letterRendering: true,
-            // IMPORTANTE: scrollY: 0 evita a página 1 em branco
             scrollY: 0, 
-            // windowHeight garante que ele "enxergue" todos os 32 itens
-            windowHeight: elemento.scrollHeight 
+            windowHeight: elemento.scrollHeight,
+            // ESSA LINHA ABAIXO TIRA OS BOTOES E O GRUPO DE INPUTS DO PDF
+            ignoreElements: (el) => el.classList.contains('no-export') || el.classList.contains('input-group')
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        // Evita que as linhas da tabela sejam cortadas ao meio entre páginas
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 

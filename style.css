@@ -60,7 +60,7 @@ input:focus {
 }
 
 .btn-pdf {
-    background-color: #27ae60; /* Verde para o PDF */
+    background-color: #27ae60; /* Verde para o botão de PDF */
     color: white;
     border: none;
     padding: 12px;
@@ -97,7 +97,7 @@ td {
 
 /* --- BOTÕES DE AÇÃO NA TABELA --- */
 .btn-edit {
-    background-color: #0d96da; /* Laranja para Editar */
+    background-color: #fbc02d; /* Mantive o amarelo para o "Editar" pois dá um bom contraste */
     color: white;
     border: none;
     padding: 5px 10px;
@@ -107,11 +107,11 @@ td {
 }
 
 .btn-edit:hover {
-    background-color: #1a7ed5;
+    background-color: #f9a825;
 }
 
 .btn-delete {
-    background: #ff6b6b; /* Vermelho para Excluir */
+    background: #ff6b6b; /* Vermelho suave para o "Remover" */
     color: white; 
     border: none; 
     padding: 5px 10px;
@@ -148,10 +148,10 @@ tr {
 }
 
 thead {
-    display: table-header-group; /* Repete o cabeçalho se houver mais de uma página */
+    display: table-header-group; 
 }
 
-/* Configurações específicas de impressão */
+/* Configurações específicas de impressão e PDF */
 @media print {
     body {
         background: none;
@@ -162,5 +162,8 @@ thead {
         width: 100% !important;
         max-width: none !important;
         box-shadow: none !important;
+    }
+    .no-export {
+        display: none !important;
     }
 }
