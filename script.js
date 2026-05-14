@@ -66,9 +66,8 @@ function gerarPDF() {
         return;
     }
 
-    // Ajustes temporários para garantir captura total
-    elemento.style.height = 'auto';
-    elemento.style.overflow = 'visible';
+    // Calcula a altura real do conteúdo para evitar quebras
+    const alturaReal = elemento.scrollHeight;
 
     const options = {
         margin: [10, 10, 10, 10],
@@ -78,15 +77,17 @@ function gerarPDF() {
             scale: 2, 
             useCORS: true,
             letterRendering: true,
-            scrollY: 0, 
-            windowHeight: elemento.scrollHeight,
-            // ESSA LINHA ABAIXO TIRA OS BOTOES E O GRUPO DE INPUTS DO PDF
+            scrollY: 0,
             ignoreElements: (el) => el.classList.contains('no-export') || el.classList.contains('input-group')
         },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        // A mágica acontece aqui: definimos o formato como um array com a largura de um A4 
+        // e a altura dinâmica baseada no seu conteúdo total
+        jsPDF: { 
+            unit: 'px', 
+            format: [650, alturaReal + 100], // 650 é a largura do seu .container
+            orientation: 'portrait' 
+        }
     };
 
-    // Gera o PDF
     html2pdf().set(options).from(elemento).save();
 }
